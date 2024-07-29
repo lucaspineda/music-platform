@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'Articulat';
   src: url('/assets/fonts/ArticulatCF-Medium.otf');
@@ -13,6 +17,7 @@
 :root {
   --dark-background: #000000;
   --dark-background-02: #1D1D1D;
+  --light-opacity: rgba(255, 255, 255, 0.50);
 }
 
 body {

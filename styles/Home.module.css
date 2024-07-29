@@ -11,4 +11,24 @@
 
 .searchSection {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.titleSpan {
+  margin-top: 0.75rem;
+  color: var(--light-opacity)
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12.75rem, 1fr));
+  grid-gap: 2.125rem;
+  margin-top: 2.5rem;
+  justify-items: center;
 }
