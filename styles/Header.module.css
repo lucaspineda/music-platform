@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  background-color: var(--dark-background-02);
+}
+
+.logoText {
+  margin-left: 145px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 120%;
+  background: linear-gradient(180deg, #00f2d5 0%, #ad00ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
