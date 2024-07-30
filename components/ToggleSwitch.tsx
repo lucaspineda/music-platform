@@ -1,12 +1,18 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "../styles/ToggleSwitch.module.css";
 
-interface ToggleSwitchProps {}
-const ToggleSwitch: FC<ToggleSwitchProps> = () => {
+interface ToggleSwitchProps {
+  handleToggle: (sort: boolean) => void
+}
+const ToggleSwitch: FC<ToggleSwitchProps> = ({handleToggle}) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const handleToggle = () => {
+  const handleToggleLocal = () => {
     setIsChecked(!isChecked);
   };
+  
+  useEffect(() => {
+    handleToggle(isChecked)
+  }, [isChecked]);
   return (
     <>
     <label htmlFor="toggle" className="text-sm mr-2 font-semibold">Sort from A-Z</label>
@@ -15,7 +21,7 @@ const ToggleSwitch: FC<ToggleSwitchProps> = () => {
         id="toggle"
         type="checkbox"
         checked={isChecked}
-        onChange={handleToggle}
+        onChange={handleToggleLocal}
         className={styles.toggleSwitchCheckbox}
       />
       <label className={`${styles.toggleSwitchLabel} ${

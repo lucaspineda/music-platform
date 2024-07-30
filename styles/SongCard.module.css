@@ -10,6 +10,7 @@
 .albumCover img {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+  /* layout */
 }
 
 .cardDetails {
