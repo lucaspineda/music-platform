@@ -7,34 +7,22 @@ import ToggleSwitch from "../components/ToggleSwitch";
 import SearchInput from "../components/SearchInput";
 import { Song } from "../types";
 import SongCard from "../components/SongCard";
+import { useFetchSongs } from "../hooks/useFetchSongs";
 
 const Home: FC = () => {
-  const localStorageKey = 'favoriteSongIds'
-
-  const [songs, setSongs] = useState<Song[]>([]);
+  const localStorageKey = "favoriteSongIds";
 
   const [favoriteSongIds, setFavoriteSongIds] = useState<Set<number>>(
     new Set([])
   );
   const [isfilteredByFavoritesActive, setIsFilteredByFavoritesActive] =
     useState<boolean>(false);
-  const [isAlphabeticalSortActive, setIsAlphabeticalSortActive] = useState<boolean>(false);
+  const [isAlphabeticalSortActive, setIsAlphabeticalSortActive] =
+    useState<boolean>(false);
 
-  const [inputValue, setInputValue] = useState<string>("");
+  const [searchQueryString, setSearchQueryString] = useState<string>("");
 
-  const fetchSongs = useCallback(async () => {
-    try {
-      const response = await fetch(`${API_BASE_PATH}/songs`);
-      const data = await response.json();
-      setSongs(data.songs);
-    } catch (err) {
-      console.log(`An error occurred when when fetching data: ${err} `);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchSongs();
-  }, []);
+  const { songs } = useFetchSongs();
 
   useEffect(() => {
     const storedArray = localStorage.getItem(localStorageKey);
@@ -43,23 +31,29 @@ const Home: FC = () => {
     }
   }, []);
 
-  const handleSearchInputChange: (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => void = (e) => {
-    setInputValue(e.target.value);
+  const handleSearchInputChange: (searchQuery: string) => void = (
+    searchQuery
+  ) => {
+    setSearchQueryString(searchQuery);
   };
 
   const toggleFavoriteSong: (songId: number) => void = (songId) => {
     if (favoriteSongIds.has(songId)) {
       const newFavoriteSongs = new Set(favoriteSongIds);
       newFavoriteSongs.delete(songId);
-      localStorage.setItem(localStorageKey, JSON.stringify(Array.from(newFavoriteSongs)));
+      localStorage.setItem(
+        localStorageKey,
+        JSON.stringify(Array.from(newFavoriteSongs))
+      );
       setFavoriteSongIds(newFavoriteSongs);
       return;
     }
     const newFavoriteSongs = new Set(favoriteSongIds);
     newFavoriteSongs.add(songId);
-    localStorage.setItem(localStorageKey, JSON.stringify(Array.from(newFavoriteSongs)));
+    localStorage.setItem(
+      localStorageKey,
+      JSON.stringify(Array.from(newFavoriteSongs))
+    );
     setFavoriteSongIds(newFavoriteSongs);
   };
 
@@ -76,18 +70,27 @@ const Home: FC = () => {
   const filteredData = useMemo(() => {
     const newSongs = [...songs];
     const result = newSongs
-    .filter((song) =>
-      isfilteredByFavoritesActive ? favoriteSongIds.has(song.id) : true
-    )
-    .filter((songData) => songData.song.title.toLowerCase().includes(inputValue.toLowerCase()))
-    .sort((a, b) => {
-      if (isAlphabeticalSortActive) {
-        return a.song.title.localeCompare(b.song.title);
-      }
-      return 0;
-    });
+      .filter((song) =>
+        isfilteredByFavoritesActive ? favoriteSongIds.has(song.id) : true
+      )
+      .filter((songData) =>
+        songData.song.title
+          .toLowerCase()
+          .includes(searchQueryString.toLowerCase())
+      )
+      .sort((a, b) => {
+        if (isAlphabeticalSortActive) {
+          return a.song.title.localeCompare(b.song.title);
+        }
+        return 0;
+      });
     return result;
-  }, [songs, isfilteredByFavoritesActive, isAlphabeticalSortActive, inputValue]);
+  }, [
+    songs,
+    isfilteredByFavoritesActive,
+    isAlphabeticalSortActive,
+    searchQueryString,
+  ]);
 
   return (
     <Layout>
@@ -109,11 +112,7 @@ const Home: FC = () => {
             <div className="flex items-center">
               <ToggleSwitch handleToggle={handleToggleSorted} />
               <div className="ml-6">
-                <SearchInput
-                  inputValue={inputValue}
-                  onChange={handleSearchInputChange}
-                  songs={songs}
-                />
+                <SearchInput onChange={handleSearchInputChange} songs={songs} />
               </div>
             </div>
           </section>

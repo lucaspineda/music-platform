@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, MouseEvent } from "react";
 
 interface HeartIconProps {
   fill: string;
   stroke: string;
-  handleOnClick?: () => void;
+  handleOnClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 const HeartIcon: FC<HeartIconProps> = ({fill, stroke, handleOnClick}) => {
   return (

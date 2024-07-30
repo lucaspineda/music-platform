@@ -16,3 +16,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.suggestionsContainer {
+  margin-left: 3.375rem;
+}

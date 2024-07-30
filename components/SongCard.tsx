@@ -3,6 +3,7 @@ import styles from "../styles/SongCard.module.css";
 import { Song } from "../types";
 import HeartIcon from "./icons/HeartIcon";
 import Image from "next/image";
+import Link from "next/link";
 
 interface SongCardProps {
   songData: Song;
@@ -12,12 +13,13 @@ interface SongCardProps {
 
 const SongCard: FC<SongCardProps> = ({ songData, favoriteSongIds, toggleFavoriteSong }) => {
   const songId = songData.id;
-  const toggleFavoriteSongLocal = () => {
+  const toggleFavoriteSongLocal = (e) => {
+    e.preventDefault()
     toggleFavoriteSong(songData.id)
   }
 
   return (
-    <figure className={styles.cardContainer}>
+    <Link href={`/song/${songData.id}`} className={styles.cardContainer}>
       <div className={styles.albumCover}>
         <Image
           className={styles.coverImg}
@@ -36,11 +38,11 @@ const SongCard: FC<SongCardProps> = ({ songData, favoriteSongIds, toggleFavorite
           <HeartIcon
             stroke={favoriteSongIds.has(songId) ? "#F8594E" : "white"}
             fill={favoriteSongIds.has(songId) ? "#F8594E" : ""}
-            handleOnClick={toggleFavoriteSongLocal}
+            handleOnClick={(e) => toggleFavoriteSongLocal(e)}
           />
         </div>
       </div>
-    </figure>
+    </Link>
   );
 };
 

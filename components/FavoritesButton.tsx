@@ -17,7 +17,7 @@ const FavoritesButton: FC<FavoritesButtonProps> = ({
   };
 
   useEffect(() => {
-    toggleFilterByFavorite(isChecked)
+    toggleFilterByFavorite(isChecked);
   }, [isChecked]);
   return (
     <button className={styles.button} onClick={toggleFilterByFavoriteLocal}>
