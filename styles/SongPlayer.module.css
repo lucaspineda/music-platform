@@ -1,0 +1,42 @@
+
+.songPlayerSection {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+
+.playIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  background-color: #FFF;
+}
+
+.songTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 120%;
+}
+
+.songDetails {
+  display: flex;
+  gap: .5rem;
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.progressBar {
+  width: 100%;
+  height: 2px;
+  background-color: #FFF;
+  border-radius: 2px;
+}
+
+.progressBarFilled {
+  height: 100%;
+  background-color: #3498db;
+  border-radius: 2px;
+}

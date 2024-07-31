@@ -7,16 +7,20 @@ import Link from "next/link";
 
 interface SongCardProps {
   songData: Song;
-  favoriteSongIds: Set<number>;
-  toggleFavoriteSong: (songId: number) => void
+  favoriteSongIds?: Set<number>;
+  toggleFavoriteSong?: (songId: number) => void;
 }
 
-const SongCard: FC<SongCardProps> = ({ songData, favoriteSongIds, toggleFavoriteSong }) => {
+const SongCard: FC<SongCardProps> = ({
+  songData,
+  favoriteSongIds,
+  toggleFavoriteSong,
+}) => {
   const songId = songData.id;
   const toggleFavoriteSongLocal = (e) => {
-    e.preventDefault()
-    toggleFavoriteSong(songData.id)
-  }
+    e.preventDefault();
+    toggleFavoriteSong(songData.id);
+  };
 
   return (
     <Link href={`/song/${songData.id}`} className={styles.cardContainer}>
@@ -35,11 +39,13 @@ const SongCard: FC<SongCardProps> = ({ songData, favoriteSongIds, toggleFavorite
         </h3>
         <div className="flex justify-between items-center">
           <span className={styles.artistName}>{songData.song.artist}</span>
-          <HeartIcon
-            stroke={favoriteSongIds.has(songId) ? "#F8594E" : "white"}
-            fill={favoriteSongIds.has(songId) ? "#F8594E" : ""}
-            handleOnClick={(e) => toggleFavoriteSongLocal(e)}
-          />
+          {favoriteSongIds && (
+            <HeartIcon
+              stroke={favoriteSongIds.has(songId) ? "#F8594E" : "white"}
+              fill={favoriteSongIds.has(songId) ? "#F8594E" : ""}
+              handleOnClick={(e) => toggleFavoriteSongLocal(e)}
+            />
+          )}
         </div>
       </div>
     </Link>

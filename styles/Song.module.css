@@ -1,0 +1,27 @@
+.container {
+  background: #12303b;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  flex-grow: 1;
+  padding: 3rem;
+  position: relative;
+}
+
+.imgContainer {
+  position: absolute;
+  width: 30rem;
+  opacity: 0.5;
+  right: 3rem;
+  top: -50px;
+}
+
+.relatedSongs {
+  margin-top: 6rem;position: relative;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12.75rem, 1fr));
+  grid-gap: 2.125rem;
+  margin-top: 2.5rem;
+}

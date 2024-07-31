@@ -1,16 +1,15 @@
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import styles from "../styles/Home.module.css";
-import { API_BASE_PATH } from "../utils/constants";
+import { API_BASE_PATH, FAVORITE_SONGS_LS_KEY } from "../utils/constants";
 import Layout from "../components/Layout";
 import FavoritesButton from "../components/FavoritesButton";
 import ToggleSwitch from "../components/ToggleSwitch";
 import SearchInput from "../components/SearchInput";
 import { Song } from "../types";
 import SongCard from "../components/SongCard";
-import { useFetchSongs } from "../hooks/useFetchSongs";
+import { useFetchSongs } from "../hooks/fetchSongs";
 
 const Home: FC = () => {
-  const localStorageKey = "favoriteSongIds";
 
   const [favoriteSongIds, setFavoriteSongIds] = useState<Set<number>>(
     new Set([])
@@ -25,9 +24,9 @@ const Home: FC = () => {
   const { songs } = useFetchSongs();
 
   useEffect(() => {
-    const storedArray = localStorage.getItem(localStorageKey);
-    if (storedArray) {
-      setFavoriteSongIds(new Set(JSON.parse(storedArray)));
+    const storedFavoritesSongsIds = localStorage.getItem(FAVORITE_SONGS_LS_KEY);
+    if (storedFavoritesSongsIds) {
+      setFavoriteSongIds(new Set(JSON.parse(storedFavoritesSongsIds)));
     }
   }, []);
 
@@ -42,7 +41,7 @@ const Home: FC = () => {
       const newFavoriteSongs = new Set(favoriteSongIds);
       newFavoriteSongs.delete(songId);
       localStorage.setItem(
-        localStorageKey,
+        FAVORITE_SONGS_LS_KEY,
         JSON.stringify(Array.from(newFavoriteSongs))
       );
       setFavoriteSongIds(newFavoriteSongs);
@@ -51,7 +50,7 @@ const Home: FC = () => {
     const newFavoriteSongs = new Set(favoriteSongIds);
     newFavoriteSongs.add(songId);
     localStorage.setItem(
-      localStorageKey,
+      FAVORITE_SONGS_LS_KEY,
       JSON.stringify(Array.from(newFavoriteSongs))
     );
     setFavoriteSongIds(newFavoriteSongs);

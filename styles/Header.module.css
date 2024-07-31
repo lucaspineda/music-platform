@@ -4,6 +4,8 @@
   height: 5rem;
   padding: 0 3rem;
   background-color: var(--dark-background-02);
+  position: relative;
+  z-index: 20;
 }
 
 .logoText {

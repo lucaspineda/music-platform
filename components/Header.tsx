@@ -1,17 +1,17 @@
-import React, { FC } from "react";
+import { useFetchSongs } from "../hooks/fetchSongs";
+import React, { FC, useMemo } from "react";
 import styles from "../styles/Header.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SearchInput from "./SearchInput";
-import { useFetchSongs } from "../hooks/useFetchSongs";
+import { Song } from "../types";
 
-interface HeaderProps {}
-const Header: FC<HeaderProps> = () => {
+interface HeaderProps {
+  songs?: Song[]
+}
+const Header: FC<HeaderProps> = ({songs}) => {
   const pathname = usePathname();
-  const isInternalSongPage: boolean = pathname.includes("/song/");
-  const { songs } = isInternalSongPage ? useFetchSongs() : { songs: [] };
-
-  console.log(songs);
+  const isInternalSongPage: boolean = pathname?.includes("/song/");
 
   return (
     <header className={styles.header}>

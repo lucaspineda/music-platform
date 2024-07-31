@@ -19,4 +19,5 @@ export interface SongDetails {
 export interface Song {
   id: number;
   song: SongDetails;
+  related?: number[]
 }
