@@ -1,12 +1,10 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "../../styles/Song.module.css";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import { useFetchSong, useFetchSongs } from "../../hooks/fetchSongs";
 import { Song, SongDetails } from "../../types";
 import Image from "next/image";
-import HeartIcon from "../../components/icons/HeartIcon";
-import PlayIcon from "../../components/icons/PlayIcon";
 import { FAVORITE_SONGS_LS_KEY } from "../../utils/constants";
 import SongPlayer from "../../components/SongPlayer";
 import SongCard from "../../components/SongCard";
@@ -18,7 +16,6 @@ interface SongProps {
 const SongPageWrapper: FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id, 'id agora')
   const { songs }: { songs: Song[] } = useFetchSongs();
 
   return (

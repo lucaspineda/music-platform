@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { API_BASE_PATH } from "../utils/constants";
-import { Song, SongDetails } from "../types";
+import { Song } from "../types";
 
 export const useFetchSongs = () => {
   const [songs, setSongs] = useState<Song[]>([]);
@@ -30,7 +30,6 @@ export const useFetchSong = (songId: string) => {
     try {
       const response = await fetch(`${API_BASE_PATH}/songs/${songId}`);
       const data = await response.json();
-      console.log(data, 'dataa')
       setSong(data);
     } catch (err) {
       console.log(`An error occurred when when fetching data: ${err} `);

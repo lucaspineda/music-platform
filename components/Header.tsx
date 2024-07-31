@@ -1,5 +1,4 @@
-import { useFetchSongs } from "../hooks/fetchSongs";
-import React, { FC, useMemo } from "react";
+import React, { FC } from "react";
 import styles from "../styles/Header.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
