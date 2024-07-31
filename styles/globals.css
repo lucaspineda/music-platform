@@ -24,10 +24,16 @@ body {
   padding: 0;
   margin: 0;
   color: #FFF;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 100%;
   font-family: 'Articulat', helvetica, arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 12px;
+  }
 }
 
 a {

@@ -63,7 +63,7 @@ const SongPlayer: FC<SongPlayerProps> = ({song, favoriteSongIds, songId, toggleF
   return (
     <section className={styles.songPlayerSection}>
       <div className="flex flex-col gap-9">
-        <div className="flex gap-9">
+        <div className="flex gap-9 md:items-center">
           <audio ref={audioRef} src={`/assets/audio/${song.files.audio}`} />
           <div onClick={handlePlayPause} className={styles.playIconWrapper}>
             {isPlaying ? (

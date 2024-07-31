@@ -15,7 +15,7 @@
   align-items: flex-start;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
   .searchSection {
     flex-direction: column;
     align-items: center;

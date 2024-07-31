@@ -28,8 +28,6 @@ export const useFetchSong = (songId: string) => {
   const fetchSong = useCallback(async () => {
     setLoading(true);
     try {
-      console.log('comecou', songId)
-
       const response = await fetch(`${API_BASE_PATH}/songs/${songId}`);
       const data = await response.json();
       console.log(data, 'dataa')

@@ -90,7 +90,7 @@ const SongPage: FC<SongProps> = ({ songId, songs }) => {
           alt={""}
         ></Image>
       </div>
-      <figure className="flex items-center relative z-10">
+      <figure className="flex items-center relative z-10 md:flex-col md:gap-8">
         <Image
           width={204}
           height={204}
